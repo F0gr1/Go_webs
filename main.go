@@ -18,12 +18,14 @@ func main() {
     var n string
     stautsMessage := make ([]string , 0 , 10)
     stauts := make ([]string , 0 , 10)
-
     statuss := make([]string  ,  0 , 10)
+    count := 0
+
+    engine.LoadHTMLGlob("template/*")
+    engine.Static("/assets" , "./assets")
     fmt.Print("ポケモンの図鑑番号を入力してね----->") 
     fmt.Scan(&n)
-    url:= "https://yakkun.com/sm/zukan/n"  + n    
-    //<img src="//78npc3br.user.webaccel.jp/poke/icon96/n1.gif" alt="フシギダネ">
+    url:= "https://yakkun.com/sm/zukan/n"  + n
     // Getリクエスト
     res, err := http.Get(url)
     if err != nil {
@@ -46,16 +48,8 @@ func main() {
     // HTMLパース
     doc, _ := goquery.NewDocumentFromReader(reader)
    // rslt := doc.Find("td.left").Text()
-    
+
     name := doc.Find("tr.head").Text()
-   /*
-   doc.Find("img").Each(func(_ int, s *goquery.Selection) {
-          url, _ := s.Attr("src")
-          fmt.Println(url)
-    })
-    */
-    count := 0
-    engine.LoadHTMLGlob("views/template/*")
     doc.Find("td.c1").Each(func(j int , t *goquery.Selection) {
     doc.Find("td.left").Each(func(i int , s *goquery.Selection) {
                  if count == 0 && t.Text()== "HP" {
