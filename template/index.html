@@ -6,6 +6,10 @@
   <link rel="stylesheet" href="../assets/index.css">
 </head>
 <body>
+  <form action="/" method="post">
+    <p>ポケモンの番号 :<input type="text" name="id" size="30" placeholder="番号"/></p>
+    <p><input type="submit" value="検索" /></p>
+  </form>
 <h1>{{.name}} </h1>
 {{range.stauts}}
 <li> {{ .}} </li>
